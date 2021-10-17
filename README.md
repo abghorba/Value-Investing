@@ -1,0 +1,1 @@
+This is a calculator for the intrinsic value of a company.
