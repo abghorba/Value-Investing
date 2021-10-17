@@ -9,7 +9,7 @@ def calculate_compound_interest(principal, interest_rate, time):
     interest_rate : float
         Annual nominal interest rate as a percent.
     time : int
-        Time in decimal years.
+        Time in years
 
     Returns
     -------
@@ -38,7 +38,7 @@ def calculate_future_revenue_per_share(current_revenue, revenue_growth, shares_o
     shares_growth : float
         Annual nominal rate of share growth as a percent. 
     time : int
-        Time in decimal years.
+        Time in years.
 
     Returns
     -------
@@ -126,7 +126,7 @@ def calculate_future_value(current_revenue, revenue_growth, shares_outstanding, 
     margin_of_revenue : float
         The percentage of revenue that is being discounted.
     time : int
-        Time in decimal years.
+        Time in years.
 
     Returns
     -------
@@ -168,7 +168,7 @@ def calculate_discounted_value(current_revenue, revenue_growth, shares_outstandi
     discounted_rate : float
         The percentage of the expected return.
     time : int
-        Time in decimal years.
+        Time in years.
 
     Returns
     -------
@@ -211,7 +211,7 @@ def calculate_intrinsic_value(current_revenue, revenue_growth, shares_outstandin
     terminal_ratio : float
         The ratio of the valuation beyond the forecasted period.
     time : int
-        Time in decimal years.
+        Time in years.
 
     Returns
     -------
@@ -222,7 +222,6 @@ def calculate_intrinsic_value(current_revenue, revenue_growth, shares_outstandin
     intrinsic_value = 0
     for year in range(1, time+1):
         discounted_value = calculate_discounted_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, margin_of_revenue, discounted_rate, year)
-        print(year, discounted_value)
         intrinsic_value += discounted_value
 
         if year == time:
