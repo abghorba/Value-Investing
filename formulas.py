@@ -43,7 +43,7 @@ def calculate_future_revenue_per_share(current_revenue, revenue_growth, shares_o
     Returns
     -------
     revenue_per_share : float
-        The calculated future revenue per share
+        The calculated future revenue per share.
     
     """
     if shares_outstanding == 0 or shares_growth == -100:
@@ -55,12 +55,13 @@ def calculate_future_revenue_per_share(current_revenue, revenue_growth, shares_o
     future_shares = calculate_compound_interest(
         shares_outstanding, shares_growth, time
     )
-    revenue_per_share = round(future_revenue/future_shares, 2)
+    
+    revenue_per_share = future_revenue/future_shares
 
     return revenue_per_share
 
 
-def calculate_margin_of_revenue(revenue_per_share, margin):
+def calculate_margin_of_revenue(revenue_per_share, margin_of_revenue):
     """
     Calculates a given margin of the revenue per share.
 
@@ -68,24 +69,26 @@ def calculate_margin_of_revenue(revenue_per_share, margin):
     ----------
     revenue_per_share : float
         The revenue per share.
-    margin : float
+    margin_of_revenue : float
         The percentage that will be used as a margin.
 
     Returns
     -------
-    float
+    marginal_value : float
         The value of the margin of the revenue per share.
 
     """
-    if margin < 0 or margin > 100:
+    if margin_of_revenue < 0 or margin_of_revenue > 100:
         return 0
 
-    return round((margin/100)*revenue_per_share, 2)
+    marginal_value = (margin_of_revenue/100)*revenue_per_share
+
+    return marginal_value
 
 
-def multiply_terminal_ratio(valuation_metric, terminal_ratio):
+def calculate_terminal_value(valuation_metric, terminal_ratio):
     """
-    Calculates the multiple of the given valuation metric.
+    Calculates the terminal value of the valuation metic.
 
     Parameters
     ----------
@@ -106,9 +109,9 @@ def multiply_terminal_ratio(valuation_metric, terminal_ratio):
     return round(valuation_metric*terminal_ratio, 2)
 
 
-def calculate_future_free_cash_flow(current_revenue, revenue_growth, shares_outstanding, shares_growth, free_cash_flow_margin, time):
+def calculate_future_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, margin_of_revenue, time):
     """
-    Calculate the free cash flow at a given time.
+    Calculate the future value margin at a given time.
 
     Parameters
     ----------
@@ -120,15 +123,15 @@ def calculate_future_free_cash_flow(current_revenue, revenue_growth, shares_outs
         Most current number of shares in millions.
     shares_growth : float
         Annual nominal rate of share growth as a percent.
-    free_cash_flow_margin : float
-        The percentage of revenue that is free cash flow.
+    margin_of_revenue : float
+        The percentage of revenue that is being discounted.
     time : int
         Time in decimal years.
 
     Returns
     -------
-    float
-        The calculated free cash flow.
+    future_value : float
+        The calculated future value.
     """
     revenue_per_share = calculate_future_revenue_per_share(
         current_revenue=current_revenue,
@@ -138,17 +141,17 @@ def calculate_future_free_cash_flow(current_revenue, revenue_growth, shares_outs
         time=time
     )
 
-    free_cash_flow = calculate_margin_of_revenue(
+    future_value = calculate_margin_of_revenue(
         revenue_per_share=revenue_per_share,
-        margin=free_cash_flow_margin
+        margin_of_revenue=margin_of_revenue
     )
 
-    return free_cash_flow
+    return future_value
 
 
-def calculate_discounted_free_cash_flow(current_revenue, revenue_growth, shares_outstanding, shares_growth, free_cash_flow_margin, discounted_rate, time):
+def calculate_discounted_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, margin_of_revenue, discounted_rate, time):
     """
-    Calculates the discounted free cash flow at a given time in years.
+    Calculates the discounted value at a given time in years.
 
     Parameters
     ----------
@@ -160,8 +163,8 @@ def calculate_discounted_free_cash_flow(current_revenue, revenue_growth, shares_
         Most current number of shares in millions.
     shares_growth : float
         Annual nominal rate of share growth as a percent.
-    free_cash_flow_margin : float
-        The percentage of revenue that is free cash flow.
+    margin_of_revenue : float
+        The percentage of revenue that is being discounted.
     discounted_rate : float
         The percentage of the expected return.
     time : int
@@ -169,27 +172,27 @@ def calculate_discounted_free_cash_flow(current_revenue, revenue_growth, shares_
 
     Returns
     -------
-    float
-        The calculated discounted free cash flow.
+    discounted_value : float
+        The calculated discounted value.
     """
-    free_cash_flow = calculate_future_free_cash_flow(
+    future_value = calculate_future_value(
         current_revenue=current_revenue,
         revenue_growth=revenue_growth,
         shares_outstanding=shares_outstanding,
         shares_growth=shares_growth,
-        free_cash_flow_margin=free_cash_flow_margin,
+        margin_of_revenue=margin_of_revenue,
         time=time
     )
 
     discount = (1+discounted_rate/100)**time
-    discounted_cash_flow = round(free_cash_flow/discount, 2)
+    discounted_value = future_value/discount
 
-    return discounted_cash_flow
+    return discounted_value
 
 
-def calculate_multiple_of_earnings_intrinsic_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, profit_margin, price_earnings_ratio, time):
+def calculate_intrinsic_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, margin_of_revenue, discounted_rate, terminal_ratio, time):
     """
-    Calculates the multiple of earnings instrinsic value.
+    Calculates the discounted instrinsic value over a given time.
 
     Parameters
     ----------
@@ -201,92 +204,31 @@ def calculate_multiple_of_earnings_intrinsic_value(current_revenue, revenue_grow
         Most current number of shares in millions.
     shares_growth : float
         Annual nominal rate of share growth as a percent.
-    profit_margin : float
-        The percentage of revenue that is net profit.
-    price_earnings_ratio : float
-        The ratio of the market cap to earnings.
-        Equivalently, price per share to earnings per share.
-        The historical market price to earnings ratio is about 15.
-    time : int
-        Time in decimal years.
-
-    Returns
-    -------
-    float
-        The multiple of earnings intrinsic value.
-
-    """
-    revenue_per_share = calculate_future_revenue_per_share(
-        current_revenue=current_revenue,
-        revenue_growth=revenue_growth,
-        shares_outstanding=shares_outstanding,
-        shares_growth=shares_growth,
-        time=time)
-
-    earnings_per_share = calculate_margin_of_revenue(
-        revenue_per_share=revenue_per_share, 
-        margin=profit_margin)
-
-    multiple_of_earnings = multiply_terminal_ratio(
-        terminal_ratio=price_earnings_ratio,
-        valuation_metric=earnings_per_share)
-
-    return multiple_of_earnings
-
-
-def calculate_discounted_free_cash_flow_intrinsic_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, free_cash_flow_margin, discounted_rate, price_free_cash_flow_ratio, time):
-    """
-    Calculates the discounted free cash flow instrinsic value over a given time.
-
-    Parameters
-    ----------
-    current_revenue : float 
-        Most current revenue in millions.
-    revenue_growth : float
-        Annual nominal rate of revenue growth as a percent.
-    shares_outstanding : float 
-        Most current number of shares in millions.
-    shares_growth : float
-        Annual nominal rate of share growth as a percent.
-    free_cash_flow_margin : float
-        The percentage of revenue that is free cash flow.
+    margin_of_revenue : float
+        The percentage of revenue that is being discounted.
     discounted_rate : float
         The percentage of the expected return.
+    terminal_ratio : float
+        The ratio of the valuation beyond the forecasted period.
     time : int
         Time in decimal years.
 
     Returns
     -------
-    float
-        The discounted free cash flow intrinsic value.
+    intrinsic_value : float
+        The discounted intrinsic value.
     """
 
-    discounted_cash_flow_intrinsic_value = 0
+    intrinsic_value = 0
     for year in range(1, time+1):
-        discounted_free_cash_flow = calculate_discounted_free_cash_flow(
-            current_revenue=current_revenue,
-            revenue_growth=revenue_growth,
-            shares_outstanding=shares_outstanding,
-            shares_growth=shares_growth,
-            free_cash_flow_margin=free_cash_flow_margin,
-            discounted_rate=discounted_rate,
-            time=year
-        )
+        discounted_value = calculate_discounted_value(current_revenue, revenue_growth, shares_outstanding, shares_growth, margin_of_revenue, discounted_rate, year)
+        print(year, discounted_value)
+        intrinsic_value += discounted_value
 
-        print(year, discounted_free_cash_flow)
+        if year == time:
+            terminal_value = calculate_terminal_value(discounted_value, terminal_ratio)
+            intrinsic_value += terminal_value
+        
+    intrinsic_value = round(intrinsic_value, 2)
 
-        discounted_cash_flow_intrinsic_value += discounted_free_cash_flow
-    
-    terminal_value = calculate_discounted_free_cash_flow(
-            current_revenue=current_revenue,
-            revenue_growth=revenue_growth,
-            shares_outstanding=shares_outstanding,
-            shares_growth=shares_growth,
-            free_cash_flow_margin=free_cash_flow_margin,
-            discounted_rate=discounted_rate,
-            time=time
-        )
-
-    terminal_value *= price_free_cash_flow_ratio
-
-    return discounted_cash_flow_intrinsic_value + terminal_value
+    return intrinsic_value
