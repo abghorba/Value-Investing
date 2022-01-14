@@ -1,29 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+        <title>Financial Calculators</title>
+    </head>
     <body>
+        <!-- App's own JS -->
+        <script src="static/js/scripts.js"></script>
 
-        <h2>Intrinsic Value Calculator</h2>
-
-        <form action="/", method="post">
-            <fieldset>
-                <legend>Inputs:</legend>
-                <input type="text" name="revenue" placeholder="Revenue"><br><br>
-                <input type="text" name="revenue-growth" placeholder="Revenue Growth %"><br><br>
-                <input type="text" name="shares-out" placeholder="Shares Outstanding"><br><br>
-                <input type="text" name="share-chg" placeholder="Share Change %"><br><br>
-                <input type="text" name="profit-margin" placeholder="Profit Margin %"><br><br>
-                <input type="text" name="fcf-margin" placeholder="Free Cash Flow Margin %"><br><br>
-                <input type="text" name="pe-ratio" placeholder="P/E Ratio"><br><br>
-                <input type="text" name="pfcf-ratio" placeholder="P/FCF Ratio"><br><br>
-                <input type="text" name="return" placeholder="Desired Annual Return"><br><br>
-                <input type="text" name="time" placeholder="Time in Years"><br><br>
-                <input class="btn btn-primary" type="submit" value="Calculate">
-                <input type="reset">
-            </fieldset>
-        </form> 
-
-        <h3>Multiple of Earnings Value: ${{ multiple_of_earnings }}</h3>
-        <h3>Discounted Cash Flow Value: ${{ discounted_cash_flow }}</h3>
-
+        <h1 align="center">Financial Calculators</h1>
+        <div align="center">
+            <button><a class="nav-link" href="/intrinsic-value-calculator"></a>Intrinsic Value</button>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
