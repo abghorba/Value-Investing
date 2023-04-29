@@ -77,7 +77,7 @@ class TestCompoundedAnnualGrowthRate:
             starting_value=starting_value, ending_value=ending_value, time_in_years=time_in_years
         )
 
-        cagr_value = cagr_object.calculate()
+        cagr_value = round(cagr_object.calculate(), 2)
 
         assert cagr_value > 0
         assert cagr_value == expected_cagr
@@ -93,7 +93,7 @@ class TestCompoundedAnnualGrowthRate:
             starting_value=starting_value, ending_value=ending_value, time_in_years=time_in_years
         )
 
-        cagr_value = cagr_object.calculate()
+        cagr_value = round(cagr_object.calculate(), 2)
 
         assert cagr_value < 0
         assert cagr_value == expected_cagr
@@ -109,7 +109,7 @@ class TestCompoundedAnnualGrowthRate:
             starting_value=starting_value, ending_value=ending_value, time_in_years=time_in_years
         )
 
-        cagr_value = cagr_object.calculate()
+        cagr_value = round(cagr_object.calculate(), 2)
 
         assert cagr_value == 0
 
@@ -122,6 +122,6 @@ class TestCompoundedAnnualGrowthRate:
                     starting_value=starting_value, ending_value=0, time_in_years=time_in_years
                 )
 
-                cagr_value = cagr_object.calculate()
+                cagr_value = round(cagr_object.calculate(), 2)
 
                 assert cagr_value == -100

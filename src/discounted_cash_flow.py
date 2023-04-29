@@ -82,10 +82,10 @@ class DiscountedCashFlow:
         if self._debug_mode:
             print(f"Revenue at Year {time} = ${revenue:,.2f}")
 
-        cash_flow = round(revenue * self.fcf_margin, 2)
+        cash_flow = revenue * self.fcf_margin
 
         if self._debug_mode:
-            print(f"Cash Flow at Year {time} = ${cash_flow}")
+            print(f"Cash Flow at Year {time} = ${cash_flow:,.2f}")
 
         return cash_flow
 
@@ -99,21 +99,22 @@ class DiscountedCashFlow:
         :return: Cash flow value
         """
 
-        assert isinstance(time, (int, float)) and time >= 0
+        assert isinstance(time, (int, float)), "time must be of type int or float"
+        assert time >= 0, "time must be greater than or equal to 0"
 
         current_cash_flow = self.get_cash_flow(time)
-        present_value = round(current_cash_flow / ((1 + self.desired_annual_return) ** time), 2)
+        present_value = current_cash_flow / ((1 + self.desired_annual_return) ** time)
 
         if self._debug_mode:
-            print(f"Present Value At Year {time} = ${present_value}")
+            print(f"Present Value At Year {time} = ${present_value:,.2f}")
 
         return present_value
 
     def get_terminal_value(self):
         """
-        Calculates the terminal value at time = T:
+        Calculates the terminal value at time = self.time_in_years:
 
-            TERMINAL_VALUE = CASH_FLOW(T) * TERMINAL_MULTIPLE
+            TERMINAL_VALUE = PRESENT_VALUE(self.time_in_years) * TERMINAL_MULTIPLE
 
         :return: Terminal value
         """
@@ -124,10 +125,10 @@ class DiscountedCashFlow:
             print("")
             print(f"Terminal Cash Flow = ${terminal_cash_flow:,.2f}")
 
-        terminal_value = round(self.terminal_multiple * terminal_cash_flow, 2)
+        terminal_value = self.terminal_multiple * terminal_cash_flow
 
         if self._debug_mode:
-            print(f"Terminal Value = ${terminal_value}")
+            print(f"Terminal Value = ${terminal_value:,.2f}")
 
         return terminal_value
 
@@ -146,7 +147,7 @@ class DiscountedCashFlow:
 
         dcf_value = 0
 
-        for time in range(1, self.time_in_years):
+        for time in range(1, self.time_in_years + 1):
             if self._debug_mode:
                 print("")
 
@@ -157,11 +158,10 @@ class DiscountedCashFlow:
 
         terminal_value = self.get_terminal_value()
         dcf_value += terminal_value
-        dcf_value = round(dcf_value, 2)
 
         print("")
         print("-" * 40)
-        print(f"DCF Value = ${dcf_value}")
+        print(f"DCF Value = ${dcf_value:,.2f}")
         print("-" * 40)
         print("")
 

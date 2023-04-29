@@ -48,4 +48,4 @@ class CompoundedAnnualGrowthRate:
         print("-" * 40)
         print("")
 
-        return round(cagr, 2)
+        return cagr
