@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from formulas import *
+from src.formulas import *
 
 # Initialize Flask app
 application = Flask(__name__)

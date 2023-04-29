@@ -1,6 +1,6 @@
 import pytest
 
-from formulas import *
+from src.formulas import *
 
 
 class TestFormulas:
