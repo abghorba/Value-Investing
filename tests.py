@@ -1,5 +1,6 @@
-from formulas import *
 import pytest
+
+from formulas import *
 
 
 class TestFormulas:
@@ -17,9 +18,7 @@ class TestFormulas:
             (0, -6, 30, 0),
         ],
     )
-    def test_calculate_compound_interest(
-        self, principal, interest_rate, time, expected
-    ):
+    def test_calculate_compound_interest(self, principal, interest_rate, time, expected):
         compound_interest = calculate_compound_interest(principal, interest_rate, time)
         assert round(compound_interest, 2) == expected
 
@@ -61,12 +60,8 @@ class TestFormulas:
             (5.00, 100.01, 0.00),
         ],
     )
-    def test_calculate_margin_of_revenue(
-        self, revenue_per_share, margin_of_revenue, expected
-    ):
-        marginal_value = calculate_margin_of_revenue(
-            revenue_per_share, margin_of_revenue
-        )
+    def test_calculate_margin_of_revenue(self, revenue_per_share, margin_of_revenue, expected):
+        marginal_value = calculate_margin_of_revenue(revenue_per_share, margin_of_revenue)
         assert round(marginal_value, 2) == expected
 
     @pytest.mark.parametrize(
@@ -191,7 +186,5 @@ class TestFormulas:
             terminal_ratio,
             time,
         )
-        margin_of_error = (
-            abs(intrinsic_value - expected) / expected if expected != 0 else 0
-        )
+        margin_of_error = abs(intrinsic_value - expected) / expected if expected != 0 else 0
         assert margin_of_error < 0.01

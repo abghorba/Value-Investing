@@ -22,9 +22,7 @@ def calculate_compound_interest(principal, interest_rate, time):
     return accrued_amount
 
 
-def calculate_future_revenue_per_share(
-    current_revenue, revenue_growth, shares_outstanding, shares_growth, time
-):
+def calculate_future_revenue_per_share(current_revenue, revenue_growth, shares_outstanding, shares_growth, time):
     """
     Calculates the future revenue per share at a specified
     time in years.
@@ -146,9 +144,7 @@ def calculate_future_value(
         time=time,
     )
 
-    future_value = calculate_margin_of_revenue(
-        revenue_per_share=revenue_per_share, margin_of_revenue=margin_of_revenue
-    )
+    future_value = calculate_margin_of_revenue(revenue_per_share=revenue_per_share, margin_of_revenue=margin_of_revenue)
 
     return future_value
 
