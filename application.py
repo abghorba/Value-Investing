@@ -36,7 +36,7 @@ def dcf_calculator():
         )
 
         dcf_value = discounted_cash_flow.calculate()
-        dcf_value_formatted = "{:.2f}".format(dcf_value)
+        dcf_value_formatted = "{:,.2f}".format(dcf_value)
 
         return render_template("dcf.html", discounted_cash_flow=dcf_value_formatted)
 
@@ -56,7 +56,7 @@ def cagr_calculator():
         )
 
         cagr_value = cagr.calculate()
-        cagr_value_formatted = "{:.2f}".format(cagr_value)
+        cagr_value_formatted = "{:,.2f}".format(cagr_value)
 
         return render_template("cagr.html", cagr=cagr_value_formatted)
 
