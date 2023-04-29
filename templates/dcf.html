@@ -8,24 +8,20 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-        <title>Intrinsic Value Calculator</title>
+        <title>DCF Calculator</title>
     </head>
     <body>
         <!-- App's own JS -->
-        <script src="static/js/scripts.js"></script>
+        <!-- <script src="static/js/scripts.js"></script> -->
 
-        <h1 align="center">Intrinsic Value Calculator</h1>
+        <h1 align="center">DCF Calculator</h1>
         <div align="center">
-            <form action="/", id="form", method="post">
+            <form action="/dcf-calculator", id="form", method="post">
                 <fieldset>
                     <legend>Inputs:</legend>
                     <input type="text" id="revenue" name="revenue" placeholder="Revenue" required><br><br>
-                    <input type="text" id="revenue-growth" name="revenue-growth" placeholder="Revenue Growth %" required><br><br>
-                    <input type="text" id="shares-out" name="shares-out" placeholder="Shares Outstanding" required><br><br>
-                    <input type="text" id="share-chg" name="share-chg" placeholder="Share Change %" required><br><br>
-                    <input type="text" id="profit-margin" name="profit-margin" placeholder="Profit Margin %" required><br><br>
+                    <input type="text" id="revenue-growth-rate" name="revenue-growth-rate" placeholder="Revenue Growth %" required><br><br>
                     <input type="text" id="fcf-margin" name="fcf-margin" placeholder="Free Cash Flow Margin %" required><br><br>
-                    <input type="text" id="pe-ratio" name="pe-ratio" placeholder="P/E Ratio" required><br><br>
                     <input type="text" id="pfcf-ratio" name="pfcf-ratio" placeholder="P/FCF Ratio" required><br><br>
                     <input type="text" id="return" name="return" placeholder="Desired Annual Return" required><br><br>
                     <input type="text" id="time" name="time" placeholder="Time in Years" required><br><br>
@@ -35,7 +31,6 @@
             </form> 
         </div>
         <div align="center">
-            <h3 id="output1">Multiple of Earnings Value: ${{ multiple_of_earnings }}</h3>
             <h3 id="output2">Discounted Cash Flow Value: ${{ discounted_cash_flow }}</h3>
         </div>
 
